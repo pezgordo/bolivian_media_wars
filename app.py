@@ -191,6 +191,8 @@ app = dash.Dash(
     ]
 )
 
+app.title = "Bolivian Media Wars"
+
 server = app.server
 
 app.layout = html.Div([
