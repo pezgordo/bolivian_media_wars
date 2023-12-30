@@ -614,4 +614,4 @@ def update_pie_chart(selected_date):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run_server(debug=True)
