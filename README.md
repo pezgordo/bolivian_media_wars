@@ -2,6 +2,8 @@
 #### Video Demo:  <URL https://youtu.be/JkqIJn0uji4>
 #### Description:
 
+https://bolivianmediawars-production.up.railway.app/
+
 "Bolivian Media Wars" is an innovative and analytical project that arises as a result of Harvard University's CS50 course. Conceived as a web scraper, this project focuses on exploring the most relevant news websites in Bolivia to extract valuable information on specific topics. The primary purpose of this tool is to analyze and visualize trends in Bolivian media, breaking down the information into six fundamental categories: politics, security, economy, officialism, opposition, and narcotics.
 
 The process begins with scanning various news portals to identify keywords associated with the aforementioned categories. Subsequently, the information is rigorously classified, allowing for a detailed analysis of current topics addressed by the media. This classification facilitates an understanding of each media outlet's stance and preferences in relation to different categories, contributing to a deeper interpretation of media dynamics in Bolivia.
