@@ -2,7 +2,7 @@
 #BY VICENTE ARTURO ZAMORA VASQUEZ#
 #COUNTRY: BOLIVIA#
 #CITY: SANTA CRUZ#
-#ß
+#ß,
 
 import dash
 from dash import Dash, html, dcc, callback, Output, Input
