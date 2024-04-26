@@ -2,7 +2,7 @@
 #BY VICENTE ARTURO ZAMORA VASQUEZ#
 #COUNTRY: BOLIVIA#
 #CITY: SANTA CRUZ#
-#ß
+#
 
 import dash
 from dash import Dash, html, dcc, callback, Output, Input
@@ -14,11 +14,24 @@ import pandas as pd
 import sqlite3
 
 # execute 'scrap.py' as if it were written in the app.py file
-with open('scrap.py') as scrap:
-    exec(scrap.read())
+try:
+    with open('scrap.py') as scrap:
+        script_content = scrap.read()
+        # Execute the script content within a separate scope
+
+        exec(script_content)
+        print("Scrap file has been read and executed successfuly")
+
+except FileNotFoundError:
+    print("Error: The file 'scrap.py' does not exist.")
+except Exception as e:
+    print("Error occurred while reading/executing the file:", e)
+finally:
+    print("Executing the rest of the code.")
 
 # Connect to SQLite database
 conn = sqlite3.connect('bol_wars.db')
+
 
 
 # QUERY EVERYTHING FROM word_categories TABLE
@@ -438,9 +451,6 @@ app.layout = html.Div([
 
 
 
-
-
-
 #***CALLBACKS***CALLBACKS***CALLBACKS***
 
 # CB 1.1 PIE CHART - PROMEDIO DE TODOS LOS MEDIOS
@@ -454,8 +464,10 @@ def update_graph(selected_date):
     dff = df[(df['date']==selected_date)]
 
     # Assign 'color_dict' colors to dff dataframe
-    dff['marker_color'] = dff['category'].map(color_dict)
-    
+    #dff.loc[:, 'marker_color'] = dff['category'].map(color_dict)
+    dff['marker_color'] = dff['category'].apply(lambda x: color_dict.get(x, None))
+
+
     # Graph Pie chart
     fig = go.Figure(data=[go.Pie(labels=dff['category'], values=dff['count'], marker=dict(colors=dff['marker_color']))])
     fig.update_layout(
@@ -493,7 +505,7 @@ def update_graph(selected_date):
     
     # Filter data based
     dff = df[(df['date']==selected_date)]
-    dff['marker_color'] = dff['category'].map(color_dict)
+    dff.loc[:, 'marker_color'] = dff['category'].map(color_dict)
 
     filtered_df = dff.groupby(['site', 'category'])['id'].count().reset_index(name='total_count')
     filtered_df['marker_color'] = filtered_df['category'].map(color_dict)
@@ -615,6 +627,10 @@ def update_pie_chart(selected_date):
     return fig
 
 
+
+conn.close()
+
+print("everything running correctly")
 
 if __name__ == '__main__':
     app.run_server(debug=True)

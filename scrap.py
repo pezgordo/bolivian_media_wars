@@ -5,6 +5,7 @@ import re
 import sqlite3
 import datetime
 from unidecode import unidecode
+import requests
 
 
 
@@ -21,7 +22,7 @@ urls = [
     #'https://lavozdetarija.com/',
     'https://www.la-razon.com/',
     'https://www.eldia.com.bo/index.php',
-    'https://www.abi.bo/',
+    #'https://www.abi.bo/',
     'https://www.redbolivision.tv.bo/',
     'https://www.atb.com.bo/',
     #'https://lapalabradelbeni.com.bo/',
@@ -119,7 +120,8 @@ categories = {
                   'prision', 'protesta', 'robar', 'robo', 'sangre', 'secuestro', 'seguridad', 'sequias', 'sufrio', 'victima', 'vigilancia', 'violenta', 'violento'}
 }
 
-# Scrap
+    # Scrap
+
 for url in urls:
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
@@ -134,7 +136,14 @@ for url in urls:
         soup = BeautifulSoup(html_data, 'html.parser')
         text = soup.get_text()
         
-        
+        if "captcha" in text.lower():
+            print(f"{url} may be asking for a CAPTCHA.")
+        else:
+            print(f"{url} is accessible without a CAPTCHA.")
+    except Exception as e:
+        print(f"Error accessing {url}: {e}")
+
+
         # ignore this words
         ignore_words = {'que', 'con', 'por', 'los', 'del', 'una', 'para', 'las', 'pero', 'como', 'the',
                         'más', 'leer', 'erbol', 'medio', 'tambien', 'este', 'fuente', 'todavía', 'porque',
@@ -205,7 +214,7 @@ for url in urls:
         for category, counts in category_counts.items():
             for word, count in counts.items():
                 add_to_word_categories = (category, word, count, url, today_date_str)
-                print(add_to_word_categories)
+                #print(add_to_word_categories)
 
                 cursor.execute('''
                                 INSERT INTO word_categories (category, word, count, site, date)
@@ -240,7 +249,7 @@ for url in urls:
         conn.commit()
         
 
-        print(data_to_add)
+        #print(data_to_add)
 
 
 
