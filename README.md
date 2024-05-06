@@ -8,7 +8,7 @@ Watch the video demo [here](https://youtu.be/JkqIJn0uji4).
 
 ## Description
 
-Explore the project [here](https://bolivian-media-wars.pezgord8.com/).
+Explore the project [here](https://coop-progreso.pezgord8.com/).
 
 The process begins with scanning various news portals to identify keywords associated with the aforementioned categories. Subsequently, the information is rigorously classified, allowing for a detailed analysis of current topics addressed by the media. This classification facilitates an understanding of each media outlet's stance and preferences in relation to different categories, contributing to a deeper interpretation of media dynamics in Bolivia.
 
